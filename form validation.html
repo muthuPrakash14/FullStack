@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Entrance Form</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f2f6ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:500px;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#003366;
+}
+
+label{
+    font-weight:bold;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:10px;
+    margin:8px 0 15px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:15px;
+}
+
+.gender{
+    display:flex;
+    gap:20px;
+    margin:10px 0 15px;
+}
+
+.gender input{
+    width:auto;
+}
+
+button{
+    width:48%;
+    padding:12px;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.submit{
+    background:#007bff;
+    color:white;
+}
+
+.submit:hover{
+    background:#0056b3;
+}
+
+.reset{
+    background:#dc3545;
+    color:white;
+}
+
+.reset:hover{
+    background:#b52b3a;
+}
+
+.buttons{
+    display:flex;
+    justify-content:space-between;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Registration Form</h2>
+
+<form id="studentForm">
+
+<label>First Name</label>
+<input type="text" id="fname">
+
+<label>Last Name</label>
+<input type="text" id="lname">
+
+<label>Email</label>
+<input type="email" id="email">
+
+<label>Mobile Number</label>
+<input type="text" id="mobile">
+
+<label>Date of Birth</label>
+<input type="date" id="dob">
+
+<label>Gender</label>
+<div class="gender">
+<label><input type="radio" name="gender" value="Male"> Male</label>
+
+<label><input type="radio" name="gender" value="Female"> Female</label>
+
+<label><input type="radio" name="gender" value="Other"> Other</label>
+</div>
+
+<label>Course</label>
+<select id="course">
+<option value="">Select Course</option>
+<option>Computer Science</option>
+<option>Mechanical</option>
+<option>Civil</option>
+<option>IT</option>
+<option>BCA</option>
+<option>B.Sc Computer Science</option>
+</select>
+
+<label>Address</label>
+<textarea id="address" rows="3"></textarea>
+
+<div class="buttons">
+<button class="submit" type="submit">Submit</button>
+<button class="reset" type="reset">Reset</button>
+</div>
+
+</form>
+
+</div>
+
+<script>
+
+let students=[];
+
+document.getElementById("studentForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let fname=document.getElementById("fname").value.trim();
+let lname=document.getElementById("lname").value.trim();
+let email=document.getElementById("email").value.trim();
+let mobile=document.getElementById("mobile").value.trim();
+let dob=document.getElementById("dob").value;
+let course=document.getElementById("course").value;
+let address=document.getElementById("address").value.trim();
+
+let gender=document.querySelector('input[name="gender"]:checked');
+
+let namePattern=/^[A-Za-z ]+$/;
+let emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let mobilePattern=/^[0-9]{10}$/;
+
+if(!namePattern.test(fname)){
+alert("Enter a valid First Name");
+return;
+}
+
+if(!namePattern.test(lname)){
+alert("Enter a valid Last Name");
+return;
+}
+
+if(!emailPattern.test(email)){
+alert("Enter a valid Email");
+return;
+}
+
+if(!mobilePattern.test(mobile)){
+alert("Enter a valid 10-digit Mobile Number");
+return;
+}
+
+if(dob==""){
+alert("Select Date of Birth");
+return;
+}
+
+if(!gender){
+alert("Select Gender");
+return;
+}
+
+if(course==""){
+alert("Select a Course");
+return;
+}
+
+if(address==""){
+alert("Enter Address");
+return;
+}
+
+let student={
+firstName:fname,
+lastName:lname,
+email:email,
+mobileNumber:Number(mobile),
+dateOfBirth:dob,
+gender:gender.value,
+course:course,
+address:address
+};
+
+students.push(student);
+
+console.log(students);
+
+alert("Registration Successful!");
+
+document.getElementById("studentForm").reset();
+
+});
+
+</script>
+
+</body>
+</html>
